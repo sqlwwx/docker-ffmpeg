@@ -1,0 +1,22 @@
+name: Docker
+
+on:
+  push:
+    tags:
+      - v*
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: clone
+        run: |
+          git clone https://github.com/sqlwwx/docker-ffmpeg.git
+      - name: Log into registry
+        run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login --username sqlwwx --password-stdin
+      - name: Push image
+        run: |
+          cd docker-ffmpeg
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          make all

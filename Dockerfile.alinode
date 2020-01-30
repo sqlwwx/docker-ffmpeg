@@ -1,0 +1,25 @@
+FROM sqlwwx/ffmpeg:latest as builder
+FROM sqlwwx/alinode
+
+COPY --from=builder /opt/ffmpeg /opt/ffmpeg
+
+ENV PATH=/opt/ffmpeg/bin:$PATH
+
+RUN apk add --no-cache bash freetype freetype-dev ttf-freefont \
+  ca-certificates \
+  openssl \
+  pcre \
+  lame \
+  libogg \
+  libass \
+  libvpx \
+  libvorbis \
+  libwebp \
+  libtheora \
+  opus \
+  rtmpdump \
+  x264-dev \
+  x265-dev \
+  && rm -rf /var/cache/apk/* /tmp/*
+
+WORKDIR /app/
