@@ -1,6 +1,6 @@
 {
   "name": "docker-ffmpeg",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "repository": "git@github.com:sqlwwx/docker-alinode.git",
   "author": "sqlwwx <wwx@wuweixing.com>",
