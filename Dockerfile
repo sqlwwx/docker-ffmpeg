@@ -65,3 +65,5 @@ RUN cd /tmp/ffmpeg-${FFMPEG_VERSION} && \
   --prefix="${PREFIX}" && \
   make && make install && make distclean && \
   rm -rf /var/cache/apk/* /tmp/*
+
+ENV PATH=/opt/ffmpeg/bin:$PATH
